@@ -1,0 +1,69 @@
+/* ==========================
+   Global theme
+========================== */
+
+:root {
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --card-bg: #111111;
+  --card-border: #444444;
+  --card-hover: #222222;
+  --font-main: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Remove default list/anchor noise */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ==========================
+   Universe shell
+   (wraps Intro + Journey)
+========================== */
+
+.universe-shell {
+  min-height: 100vh;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================
+   Main layout container
+========================== */
+
+.container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem clamp(1.5rem, 5vw, 4rem);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  column-gap: clamp(2rem, 7vw, 6rem);
+  row-gap: 2.5rem;
+}
+
+/* Mobile: stack sections, tighter padding */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    padding: 2.2rem 1.25rem 2.6rem;
+    align-items: flex-start;
+  }
+}

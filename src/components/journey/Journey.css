@@ -1,0 +1,375 @@
+/* ==============================
+   BASE CONTAINER
+============================== */
+.journey-container {
+  width: 100%;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 6vh, 48px) 0;
+}
+
+
+.journey-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* ==============================
+   ONBOARD SCREEN
+============================== */
+.onboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+  color: #fff;
+  padding: 32px 20px;
+}
+
+.bus-onboard {
+  width: 140px;
+  max-width: 40vw;
+  filter: drop-shadow(0 0 25px rgba(99, 102, 241, 0.8));
+  animation: float 3s ease-in-out infinite;
+}
+
+.onboard h2 {
+  font-size: 1.7rem;
+  letter-spacing: 1px;
+}
+
+.start-btn {
+  margin-top: 8px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: radial-gradient(circle at top left, #6366f1, #0f172a);
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.start-btn:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5);
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+/* ==============================
+   TRACK (DESKTOP)
+============================== */
+.journey-track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 260px;
+}
+
+/* horizontal road */
+.road {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #1f2937;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.road-progress {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 4px;
+  width: 0;
+  background: linear-gradient(90deg, #6366f1, #a855f7);
+  box-shadow: 0 0 15px #a855f7;
+  transform: translateY(-50%);
+  transition: width 1.2s ease-in-out;
+  z-index: 2;
+}
+
+/* bus on road */
+.bus-moving {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 60px;
+  transform: translate(calc(var(--bus-offset) - 30px), -50%);
+  transition: transform 1.2s ease-in-out;
+  z-index: 10;
+}
+
+/* ==============================
+   START STAND + SMOKE
+============================== */
+.journey-start-stand {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -140%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: transparent;
+  border-radius: 999px;
+  color: #e5e7eb;
+  font-size: 0.8rem;
+  z-index: 6;
+}
+
+.start-stand-svg {
+  width: 18px;
+  height: 18px;
+  filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.8));
+}
+
+.journey-start-stand span {
+  white-space: nowrap;
+  margin-bottom: 6px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.95);
+  background: radial-gradient(circle at top, rgba(30, 64, 175, 0.35), transparent);
+  text-shadow: 0 0 10px rgba(168, 85, 247, 0.9);
+}
+
+
+/* smoke animation used on both desktop and mobile */
+.journey-start-stand.smoke-out {
+  animation: smokeFade 1.3s ease-out forwards;
+}
+
+@keyframes smokeFade {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -140%) scale(1);
+    filter: blur(0px);
+  }
+  60% {
+    opacity: 0.7;
+    transform: translate(-50%, -170%) scale(1.04);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -210%) scale(1.06);
+    filter: blur(4px);
+  }
+}
+
+/* ==============================
+   CARDS (DESKTOP)
+============================== */
+.stop {
+  position: absolute;
+  width: 260px;
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 20px 18px;
+  border-radius: 20px;
+  text-align: center;
+  color: #e5e7eb;
+  opacity: 0;
+  transform: translateX(-50%) translateY(10px) scale(0.9);
+  transition:
+    opacity 0.4s ease-out,
+    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    border-color 0.3s ease-out,
+    box-shadow 0.3s ease-out;
+  z-index: 5;
+  backdrop-filter: blur(10px);
+}
+
+.stop h3 {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.stop p {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin-bottom: 10px;
+}
+
+.stop .visit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: #a855f7;
+  text-decoration: none;
+  margin-top: 4px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.stop .visit-link:hover {
+  color: #c4b5fd;
+  transform: translateY(-1px);
+}
+
+.stop.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+  border-color: rgba(168, 85, 247, 0.6);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+}
+
+/* alternate up/down on desktop */
+.stop.up {
+  bottom: calc(50% + 70px);
+}
+
+.stop.down {
+  top: calc(50% + 70px);
+}
+
+.stop .icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 10px auto;
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.18), transparent);
+}
+
+.stop-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ==============================
+   MOBILE LAYOUT
+============================== */
+@media (max-width: 768px) {
+  .journey-container {
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px 0 32px 0; /* a bit less than before */
+  }
+
+  .journey-track {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 0 32px 0;
+    width: 100%;
+    position: relative;
+  }
+
+  .road,
+  .road-progress {
+    left: 32px;
+    top: 0;
+    width: 4px !important;
+    height: 100% !important;
+    transform: none;
+  }
+
+  .road {
+    background: #1f2933;
+  }
+
+  .road-progress {
+    background: linear-gradient(180deg, #6366f1, #a855f7);
+    box-shadow: 0 0 12px #a855f7;
+    transition: height 1.2s ease-in-out;
+  }
+
+  .bus-moving {
+    left: 32px;
+    top: 0;
+    width: 50px;
+    transform: translate(-50%, var(--bus-offset));
+    transition: transform 1.2s ease-in-out;
+  }
+
+  /* stand placed inline on mobile but still smokes */
+  .journey-start-stand {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: translate(0, 0);
+    margin-left: 72px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    align-items: center;
+    padding: 4px 0;
+  }
+
+  /* override smoke keyframes so it moves up, not centered */
+  .journey-start-stand.smoke-out {
+    animation: smokeFadeMobile 1.3s ease-out forwards;
+  }
+
+  @keyframes smokeFadeMobile {
+    0% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0px);
+    }
+    60% {
+      opacity: 0.7;
+      transform: translateY(-20px) scale(1.04);
+      filter: blur(1px);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-40px) scale(1.06);
+      filter: blur(4px);
+    }
+  }
+
+  .stop {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: calc(100% - 80px);
+    margin-left: 72px;
+    margin-bottom: 36px;
+    text-align: left;
+    transform: translateY(12px) scale(0.95) !important;
+  }
+
+  .stop.active {
+    transform: translateY(0) scale(1) !important;
+  }
+
+  .stop.up,
+  .stop.down {
+    top: auto !important;
+    bottom: auto !important;
+  }
+
+
+/* On mobile, shrink them slightly */
+@media (max-width: 768px) {
+  .stop .icon {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 8px;
+  }
+}
+
+}

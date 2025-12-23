@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { JOURNEY_STOPS } from "../../data/journey";
-import "./journey.css";
+import "./Journey.css";
 import busImg from "../../assets/bus.png";
 
 const STEP_GAP_DESKTOP = 420;
